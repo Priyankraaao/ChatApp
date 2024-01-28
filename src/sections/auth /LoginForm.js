@@ -7,6 +7,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 import * as Yup from "yup";
 import FormProvider from "../../components/hook-form/FormProvider";
 import { useState } from "react";
@@ -83,7 +84,7 @@ const LoginForm = () => {
           />
         </Stack>
         <Stack alignItems={"flex-end"} sx={{ my: 2 }}>
-          <Link variant="body2" underline="always" color="inherit">
+        <Link component={RouterLink} to="/auth/reset-password" variant="body2" underline="always" color="inherit">
             Forget Password ?
           </Link>
         </Stack>
