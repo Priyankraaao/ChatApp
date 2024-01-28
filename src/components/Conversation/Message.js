@@ -9,31 +9,31 @@ import {
   Timeline,
 } from "./MessageTypes";
 
-const Message = () => {
+const Message = ({ menu }) => {
   return (
     <Box p={3}>
       <Stack spacing={3}>
         {Chat_History.map((chat) => {
           switch (chat.type) {
             case "divider":
-              return <Timeline chat={chat} />;
+              return <Timeline chat={chat} menu={menu} />;
 
             case "msg":
               switch (chat.subtype) {
                 case "img":
-                  return <MediaMsg chat={chat} />;
+                  return <MediaMsg chat={chat} menu={menu} />;
 
                 case "doc":
-                  return <DocMsg chat={chat} />;
+                  return <DocMsg chat={chat} menu={menu} />;
 
                 case "link":
-                  return <LinkMsg chat={chat} />;
+                  return <LinkMsg chat={chat} menu={menu} />;
 
                 case "reply":
-                  return <ReplyMsg chat={chat} />;
+                  return <ReplyMsg chat={chat} menu={menu} />;
 
                 default:
-                  return <TextMsg chat={chat} />;
+                  return <TextMsg chat={chat} menu={menu} />;
               }
 
             default:

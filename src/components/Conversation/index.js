@@ -15,7 +15,7 @@ const Conversation = () => {
           height:"100%"
         }}
       >
-        <Message />
+        <Message menu={true} />
       </Box>
       <Footer />
     </Stack>

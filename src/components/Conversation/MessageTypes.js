@@ -7,13 +7,14 @@ import {
   MenuItem,
   Stack,
   Typography,
+  alpha,
   useTheme,
 } from "@mui/material";
 import { DotsThreeVertical, DownloadSimple, Image } from "phosphor-react";
 import React from "react";
 import { Message_options } from "../../data";
 
-const DocMsg = ({ chat }) => {
+const DocMsg = ({ chat, menu }) => {
   const theme = useTheme();
 
   return (
@@ -53,16 +54,20 @@ const DocMsg = ({ chat }) => {
           </Typography>
         </Stack>
       </Box>
-      <MessageOptions />
+      {menu ? <MessageOptions /> : null}
     </Stack>
   );
 };
 
-const LinkMsg = ({ chat }) => {
+const LinkMsg = ({ chat, menu }) => {
   const theme = useTheme();
 
   return (
-    <Stack direction="row" justifyContent={chat.incoming ? "start" : "end"}>
+    <Stack
+      direction="row"
+      justifyContent={chat.incoming ? "start" : "end"}
+      alignItems={"center"}
+    >
       <Box
         p={1.5}
         sx={{
@@ -114,12 +119,12 @@ const LinkMsg = ({ chat }) => {
           </Stack>
         </Stack>
       </Box>
-      <MessageOptions />
+      {menu ? <MessageOptions /> : null}
     </Stack>
   );
 };
 
-const ReplyMsg = ({ chat }) => {
+const ReplyMsg = ({ chat, menu }) => {
   const theme = useTheme();
 
   return (
@@ -157,21 +162,22 @@ const ReplyMsg = ({ chat }) => {
           </Typography>
         </Stack>
       </Box>
-      <MessageOptions />
+      {menu ? <MessageOptions /> : null}
     </Stack>
   );
 };
 
-const MediaMsg = ({ chat }) => {
+const MediaMsg = ({ chat, menu }) => {
   const theme = useTheme();
 
   return (
     <Stack direction="row" justifyContent={chat.incoming ? "start" : "end"}>
       <Box
-        p={1.5}
+        px={1.5}
+        py={1.5}
         sx={{
           backgroundColor: chat.incoming
-            ? theme.palette.background.default
+            ? alpha(theme.palette.background.default, 1)
             : theme.palette.primary.main,
           borderRadius: 1.5,
           width: "max-content",
@@ -185,18 +191,18 @@ const MediaMsg = ({ chat }) => {
           />
           <Typography
             variant="body2"
-            sx={{ color: chat.incoming ? theme.palette.text : "#fff" }}
+            color={chat.incoming ? theme.palette.text : "#fff"}
           >
             {chat.message}
           </Typography>
         </Stack>
-      </Box>{" "}
-      <MessageOptions />
+      </Box>
+      {menu ? <MessageOptions /> : null}
     </Stack>
   );
 };
 
-const TextMsg = ({ chat = {} }) => {
+const TextMsg = ({ chat = {}, menu }) => {
   const theme = useTheme();
 
   return (
@@ -218,7 +224,7 @@ const TextMsg = ({ chat = {} }) => {
           {chat.message}
         </Typography>
       </Box>
-      <MessageOptions />
+      {menu ? <MessageOptions /> : null}
     </Stack>
   );
 };
