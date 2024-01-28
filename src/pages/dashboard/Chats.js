@@ -6,16 +6,19 @@ import {
   Button,
   Divider,
   IconButton,
-  InputBase,
   Stack,
   Typography,
-  alpha,
   styled,
   useTheme,
 } from "@mui/material";
 import { ArchiveBox, CircleDashed, MagnifyingGlass } from "phosphor-react";
 import { ChatList } from "../../data";
 import { SimpleBarStyle } from "../../components/Scrollbar";
+import {
+  Search,
+  SearchIconWrapper,
+  StyledInputBase,
+} from "../../components/Search";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -49,17 +52,18 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 // direction="row" alignItems="center" justifyContent="center"
 
 const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
+  const theme = useTheme();
 
-  const theme = useTheme()
-  
   return (
-
     <Box
       p={2}
       sx={{
         width: "100%",
         borderRadius: 1,
-        backgroundColor: theme.palette.mode==="light"? "#fff":theme.palette.background.default,
+        backgroundColor:
+          theme.palette.mode === "light"
+            ? "#fff"
+            : theme.palette.background.default,
       }}
     >
       <Stack direction="row" alignItems="center" justifyContent="space-between">
@@ -93,55 +97,22 @@ const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
   );
 };
 
-const Search = styled("div")(({ theme }) => {
-  return {
-    position: "relative",
-    borderRadius: "20px",
-    backgroundColor: alpha(theme.palette.background.default, 1),
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: "100%",
-  };
-});
-
-const SearchIconWrapper = styled("div")(({ theme }) => {
-  return {
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  };
-});
-
-const StyledInputBase = styled(InputBase)(({ theme }) => {
-  return {
-    color: "inherit",
-    "& .MuiInputBase-input": {
-      padding: theme.spacing(1, 1, 1, 0),
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      width: "100%",
-    },
-  };
-});
-
 const Chats = () => {
-
-  const theme = useTheme()
-
+  const theme = useTheme();
 
   return (
     <Box
       sx={{
         position: "relative",
         width: "320px",
-        backgroundColor: theme.palette.mode==="light"? "#f8faff":theme.palette.background.paper,
+        backgroundColor:
+          theme.palette.mode === "light"
+            ? "#f8faff"
+            : theme.palette.background.paper,
         boxShadow: "0px 0px 2px rgba(0,0,0,0.25)",
       }}
     >
-      <Stack p={3} spacing={2} sx={{ height: "100vh"}}>
+      <Stack p={3} spacing={2} sx={{ height: "100vh" }}>
         <Stack
           direction={"row"}
           alignItems={"center"}
@@ -175,26 +146,24 @@ const Chats = () => {
           sx={{ flexGrow: 1, overflow: "scroll", height: "100%" }}
         >
           <SimpleBarStyle timeout={500} clickOnTrack={false}>
-          <Stack spacing={2.4}>
-            <Typography variant="subtitle2" sx={{ color: "#676767" }}>
-              Pinned
-            </Typography>
+            <Stack spacing={2.4}>
+              <Typography variant="subtitle2" sx={{ color: "#676767" }}>
+                Pinned
+              </Typography>
 
-            {ChatList.filter((item) => item.pinned).map((chat) => {
-              return <ChatElement key={chat.id} {...chat} />;
-            })}
+              {ChatList.filter((item) => item.pinned).map((chat) => {
+                return <ChatElement key={chat.id} {...chat} />;
+              })}
+            </Stack>
+            <Stack spacing={2.4}>
+              <Typography variant="subtitle2" sx={{ color: "#676767" }}>
+                All Chats
+              </Typography>
 
-          </Stack>
-          <Stack spacing={2.4}>
-            <Typography variant="subtitle2" sx={{ color: "#676767" , }}>
-              All Chats
-            </Typography>
-
-            {ChatList.filter((item) => !item.pinned).map((chat) => {
-              return <ChatElement key={chat.id} {...chat} />;
-            })}
-            
-          </Stack>
+              {ChatList.filter((item) => !item.pinned).map((chat) => {
+                return <ChatElement key={chat.id} {...chat} />;
+              })}
+            </Stack>
           </SimpleBarStyle>
         </Stack>
       </Stack>
