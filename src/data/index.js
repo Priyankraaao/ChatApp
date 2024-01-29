@@ -87,14 +87,17 @@ const Nav_Buttons = [
   {
     index: 0,
     icon: <ChatCircleDots />,
+    path:"/app"
   },
   {
     index: 1,
     icon: <Users />,
+    path:"/group"
   },
   {
     index: 2,
     icon: <Phone />,
+    path:"/call"
   },
 ];
 
@@ -102,6 +105,74 @@ const Nav_Setting = [
   {
     index: 3,
     icon: <GearSix />,
+    path:"/settings"
+  },
+];
+
+const CallLogList = [
+  {
+    id: 0,
+    img: faker.image.avatar(),
+    name: faker.name.firstName(),
+    msg: faker.music.songName(),
+    missed: true,
+    incoming: false,
+  },
+  {
+    id: 1,
+    img: faker.image.avatar(),
+    name: faker.name.firstName(),
+    msg: faker.music.songName(),
+    missed: true,
+    incoming: false,
+  },
+  {
+    id: 2,
+    img: faker.image.avatar(),
+    name: faker.name.firstName(),
+    msg: faker.music.songName(),
+    missed: false,
+    incoming: false,
+  },
+  {
+    id: 3,
+    img: faker.image.avatar(),
+    name: faker.name.firstName(),
+    msg: faker.music.songName(),
+    missed: false,
+    incoming: false,
+  },
+  {
+    id: 4,
+    img: faker.image.avatar(),
+    name: faker.name.firstName(),
+    msg: faker.music.songName(),
+    missed: true,
+    incoming: false,
+  },
+  {
+    id: 5,
+    img: faker.image.avatar(),
+    name: faker.name.firstName(),
+    msg: faker.music.songName(),
+    missed: true,
+    incoming: false,
+  },
+  {
+    id: 6,
+    img: faker.image.avatar(),
+    name: faker.name.firstName(),
+    msg: faker.music.songName(),
+    missed: true,
+    incoming: true,
+  },
+  {
+    id: 7,
+    img: faker.image.avatar(),
+    name: faker.name.firstName(),
+    msg: faker.music.songName(),
+    missed: true,
+    incoming: true,
   },
 ];
 
@@ -287,4 +358,5 @@ export {
   Message_options,
   SHARED_LINK,
   SHARED_DOCS,
+  CallLogList
 };

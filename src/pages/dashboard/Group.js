@@ -1,18 +1,37 @@
 import {
+  Avatar,
+  Badge,
   Box,
+  Button,
+  Divider,
+  IconButton,
+  Link,
   Stack,
   Typography,
+  styled,
+  useTheme,
 } from "@mui/material";
-import {  MagnifyingGlass } from "phosphor-react";
+import { ArchiveBox, MagnifyingGlass, Plus } from "phosphor-react";
 import {
   Search,
   SearchIconWrapper,
   StyledInputBase,
 } from "../../components/Search";
+import { ChatList } from "../../data";
+import { SimpleBarStyle } from "../../components/Scrollbar";
+import { faker } from "@faker-js/faker";
+import ChatElement from "../../components/ChatElement";
+import CreateGroup from "../../sections/main/CreateGroup";
+import { useState } from "react";
+
 
 const Group = () => {
+  const theme = useTheme();
+  const [openDailog,setOpenDailog]=useState(false)
+
   return (
-    <Stack direction={"row"} sx={{ width: "100%" }}>
+    <>
+        <Stack direction={"row"} sx={{ width: "100%" }}>
       {/* /<Chats > */}
 
       <Box
@@ -38,26 +57,56 @@ const Group = () => {
               <StyledInputBase placeholder="Search" />
             </Search>
           </Stack>
+          <Stack
+            direction={"row"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+          >
+            <Typography variant="subtitle2" component={Link}>
+              Create New Group
+            </Typography>
+            <IconButton onClick={()=>setOpenDailog(true)}>
+              <Plus style={{ color: theme.palette.primary.main }} />
+            </IconButton>
+          </Stack>
+          <Divider />
+         
+          <Stack
+            spacing={2}
+            direction={"column"}
+            sx={{ flexGrow: 1, overflow: "scroll", height: "100%" }}
+          >
+            <SimpleBarStyle timeout={500} clickOnTrack={false}>
+              <Stack spacing={2.4}>
+                <Typography variant="subtitle2" sx={{ color: "#676767" }}>
+                  Pinned
+                </Typography>
+
+                {ChatList.filter((item) => item.pinned).map((chat) => {
+                  return <ChatElement key={chat.id} {...chat} />;
+                })}
+              </Stack>
+              <Stack spacing={2.4}>
+                <Typography variant="subtitle2" sx={{ color: "#676767" }}>
+                  All Groups
+                </Typography>
+
+                {ChatList.filter((item) => !item.pinned).map((chat) => {
+                  return <ChatElement key={chat.id} {...chat} />;
+                })}
+              </Stack>
+            </SimpleBarStyle>
+          </Stack>
         </Stack>
       </Box>
-
-      {/* <Box
-        sx={{
-          height: "100%",
-          width: appStore.sidebar.open
-            ? "calc(100vw - 740px)"
-            : "calc(100vw - 420px)",
-          backgroundColor:
-            theme.palette.mode === "light"
-              ? "#F0f4f4"
-              : theme.palette.background.default,
-        }}
-      >
-        <Conversation />
-      </Box> */}
-
-      {/* {appStore.sidebar.open ? <RightSideComponent /> : null} */}
     </Stack>
+    {openDailog && <CreateGroup  open={openDailog} handleClose={()=>{
+        setOpenDailog(false)
+    }}/>}
+    
+    </>
+
+
   );
 };
 

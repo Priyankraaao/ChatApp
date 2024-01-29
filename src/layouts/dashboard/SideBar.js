@@ -15,10 +15,12 @@ import { faker } from "@faker-js/faker";
 import React, { useState } from "react";
 import Logo from "../../assets/Images/logo.ico";
 import AntSwitch from "../../components/AntSwitch";
+import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
   const theme = useTheme();
   const [selected, setSelected] = useState(0);
+  const navigate=useNavigate();
 
   const { onToggleMode } = useSettings();
 
@@ -26,7 +28,9 @@ const SideBar = () => {
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+  
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -59,7 +63,7 @@ const SideBar = () => {
               backgroundColor: theme.palette.primary.main,
               height: "64px",
               width: "64px",
-              borderRadius: 1.5, // this will be mutliplied by 8 bcz its default spacing in material ui
+              borderRadius: 1.5,  // this will be mutliplied by 8 bcz its default spacing in material ui
             }}
           >
             <img src={Logo} alt="logo" />
@@ -86,6 +90,7 @@ const SideBar = () => {
                 key={item.index}
                 onClick={() => {
                   setSelected(item.index);
+                  navigate(item.path)  
                 }}
                 sx={{
                   width: "max-content",
@@ -114,6 +119,7 @@ const SideBar = () => {
             <IconButton
               onClick={() => {
                 setSelected(Nav_Buttons.length);
+                navigate("/settings")  
               }}
               sx={{
                 width: "max-content",
